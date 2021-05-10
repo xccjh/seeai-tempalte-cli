@@ -64,7 +64,7 @@ seeai-cli c -g templateOrigin
 xccjh-zjh
 ```
 ```shell script
-seeai-cli c -g templateDomain
+seeai-cli c -g domainOrigin
 ```
 命令行交互
 ```shell script
