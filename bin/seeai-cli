@@ -1,0 +1,115 @@
+#!/usr/bin/env node
+
+
+const {chalk, program} = require('../libs/tools/module')
+const packageData = require('../package.json')
+const log = console.log;
+
+//当前cli的名称
+const cliName = packageData.name;
+const cliVersion = packageData.version
+
+
+/**
+ * 参数的格式化插件
+ * @param cmd 当前命令行中的命令数据
+ */
+const clearArgs = (cmd) => {
+    const args = {};
+    cmd.options.forEach(o => {
+        const key = o.long.slice(2)
+        //如果当前命令通过key能取到这个值，则存在这个值
+        if (cmd[key])
+            args[key] = cmd[key];
+    });
+    return args
+}
+
+//创建create命令 并进行操作
+program.command('create [project-name]', {noHelp: true})
+    .description("基于seeaI模板生成新项目")
+    .option("-f,--force", '如果存在强制覆盖创建')
+    .option("-s,--skipInstall", '跳过安装依赖')
+    .action((name, cmd) => {
+        console.log(chalk.green.bold(
+            `┌───────────────────────────────────────────┐\n` +
+            `│                                           │\n` +
+            `│         欢迎使用 seeai-cli v1.0.0         │\n` +
+            `│                                           │\n` +
+            `└───────────────────────────────────────────┘`));
+        if (!name) {
+            log(chalk.red("请填写你想要的项目名称!  示例:seeai-cli create demo"))
+            return;
+        }
+        require('../libs/command/create.js')(name, clearArgs(cmd))
+    })
+
+program.command('c [value]')
+    .description("检查并修改配置")
+    .option("-g,--get <templateOrigin|domainOrigin|templateDefault|domainDefault>", '从配置中获取选项值')
+    .option("-sto,--setTemplateOrigin", '配置你自己的模板源')
+    .option("-stu,--setDomainOrigin", '配置你自己的模板源')
+    .option("-std,--setDefault", '重置默认模板源')
+    .action((value, cmd) => {
+        //调用config
+        require('../libs/command/config.js')(value, clearArgs(cmd))
+    }).alias('config')
+
+//添加项目选项
+program.command('g  [path]')
+    .description("增加目录或文件")
+    .option("-f,--force", '如果存在强制覆盖')
+    .option("-t,--template", '生成模板')
+    .action((path, cmd) => {
+        let args = clearArgs(cmd);
+        //调用config
+        if (!path && (args && !args.template)) {
+            log(chalk.red.bold("你必须指定路径!"))
+            return;
+        }
+        require('../libs/command/add.js')(path, clearArgs(cmd))
+    }).alias('generate')
+
+//删除项目
+program.command('r [path]')
+    .description("删除目录或文件")
+    .action((path, cmd) => {
+        //path
+        //调用config
+        if (!path) {
+            log(chalk.red.bold("你必须指定路径!"))
+            return;
+        }
+        //输入可能是正则 ，因此会匹配相关的文件，需要进行处理
+        let args = cmd.args;
+        require('../libs/command/delete.js')(args, clearArgs(cmd))
+    }).alias('remove')
+
+//credit-cli 的版本信息
+program
+    .version(`${cliName}@${packageData.version}`)
+    .name(Object.keys(packageData.bin)[0])
+    .usage('<command> [option]')
+
+
+program.command('help [command]')
+    .description("显示命令帮助")
+
+//在 --help 的时候进行调整
+program.on('--help', () => {
+    log(`运行 ${chalk.red(`${cliName} <command> [--help, -h]`)} 显示帮助`)
+})
+
+program.on('command:*', function (obj) {
+    console.log('未知的命令：' + obj[0])
+    const availableCommands = program.commands.map(cmd => cmd.name())
+    console.log('可用的命令：' + availableCommands.join(',')) // 可用的命令：clone,service,install
+})
+
+//解析用户执行命令时候传入的参数 根据参数进行配置
+program.parse(process.argv)
+
+if (!program.args) {
+    program.help()
+}
+
