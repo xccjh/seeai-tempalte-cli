@@ -78,7 +78,7 @@ class Creator {
         //2.把路径资源下载到某个路径上 xccjh-zjh/
 
         //todo 后续可以增加缓存功能
-        await wrapLoading(this.downloadGitRepo, `正在初始化 ${repo.split('(')[0]} ${repo.split('(')[0]} 到本地...`, requestUrl, downloadUrl, {clone: true});
+        await wrapLoading(this.downloadGitRepo, `正在初始化 ${repo.split('(')[0]} ${tag.split('(')[0]} 到本地...`, requestUrl, downloadUrl, {clone: true});
         return downloadUrl;
     }
 
@@ -86,7 +86,7 @@ class Creator {
         let that = this;
         log.info('√ 项目初始化完毕!')
         if (options && options.skipInstall) {
-            const gitCommand = `seeai-cli r .git && git init && git add . && git commit -m 初始化项目`;
+            const gitCommand = `cd ${downLoadUrl} && seeai-cli r .git && git init && git add . && git commit -m 初始化项目`;
             exec(gitCommand, function (err, stdout, stderr) {
                 if (err) {
                     console.log('get stdout error:' + gitCommand)
@@ -114,7 +114,7 @@ class Creator {
         });
         instance.on('close', (code) => {
             if (code === 0) {
-                const gitCommand = `seeai-cli r .git && git init && git add . && git commit -m 初始化项目`;
+                const gitCommand = `cd ${downLoadUrl} && seeai-cli r .git && git init && git add . && git commit -m 初始化项目`;
                 exec(gitCommand, function (err, stdout, stderr) {
                     if (err) {
                         console.log('get stdout error:' + gitCommand)
