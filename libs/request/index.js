@@ -28,7 +28,7 @@ async function getRepoTags(repo) {
         arr.splice(1,0,'://','api.')
         url = arr.join('')
     }
-    let result = axios.get(url + `/repos/${templateOrigin}/${repo}/tags`);
+    let result = axios.get(url + `/repos/${templateOrigin}/${repo.split('(')[0]}/tags`);
     return result;
 }
 
