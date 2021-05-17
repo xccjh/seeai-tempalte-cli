@@ -5,7 +5,7 @@ const {spawn, exec} = require('child_process');
 const {templateOrigin, domainOrigin} = require('../config');
 
 //downloadGitRepo 为普通方法，不支持promise
-const downloadGitRepo = require('download-git-repo')
+const downloadGitRepo = require('@xccjh/download-git')
 const util = require('util');
 const path = require('path')
 const log = require("./Log")

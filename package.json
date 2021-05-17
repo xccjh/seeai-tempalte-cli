@@ -1,5 +1,5 @@
 {
-  "name": "@xccjh/ky-seeai-cli",
+  "name": "@ky/seeai-cli",
   "version": "1.0.4",
   "description": "SEEAI通用vue项目脚手架",
   "bin": {
@@ -27,6 +27,7 @@
   "author": "zoujiahe",
   "license": "ISC",
   "dependencies": {
+    "@xccjh/download-git": "^1.0.0",
     "async": "^3.2.0",
     "axios": "^0.20.0",
     "chalk": "^4.1.0",
