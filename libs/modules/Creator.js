@@ -86,12 +86,13 @@ class Creator {
         let that = this;
         log.info('√ 项目初始化完毕!')
         if (options && options.skipInstall) {
-            const gitCommand = `cd ${downLoadUrl} && seeai-cli r .git && git init && git add . && git commit -m 初始化项目`;
+            // const gitCommand = `cd ${downLoadUrl} && seeai-cli r .git && git init && git add . && git commit -m 初始化项目`;
+            const gitCommand = `cd ${downLoadUrl} && git remote rm origin`;
             exec(gitCommand, function (err, stdout, stderr) {
                 if (err) {
                     console.log('get stdout error:' + gitCommand)
                     console.log(stderr)
-                    log.error(`\r? 初始化git失败,不用担心,请手动进入 ${that.name} 初始化git即可:`)
+                    log.error(`\r? 初始化git失败,不用担心,请手动进入 ${that.name} 删除.git，重新初始化git即可:`)
                     log.error(`\n cd ${that.name} \n git add .\n git commit -m 初始化项目`)
                     log.error(`\n 没有安装依赖，记得手动安装依赖哦~`)
                     process.exit()
@@ -114,12 +115,13 @@ class Creator {
         });
         instance.on('close', (code) => {
             if (code === 0) {
-                const gitCommand = `cd ${downLoadUrl} && seeai-cli r .git && git init && git add . && git commit -m 初始化项目`;
+                // const gitCommand = `cd ${downLoadUrl} && seeai-cli r .git && git init && git add . && git commit -m 初始化项目`;
+                const gitCommand = `cd ${downLoadUrl} && git remote rm origin`;
                 exec(gitCommand, function (err, stdout, stderr) {
                     if (err) {
                         console.log('get stdout error:' + gitCommand)
                         console.log(stderr)
-                        log.error(`\r? 初始化git失败,不用担心,请手动进入 ${that.name} 初始化git即可:`)
+                        log.error(`\r? 初始化git失败,不用担心,请手动进入 ${that.name} 删除.git，初始化git即可:`)
                         log.error(`\n cd ${that.name} \n git add .\n git commit -m 初始化项目`)
                         process.exit()
                     } else {

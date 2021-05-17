@@ -1,6 +1,6 @@
 {
-  "name": "hq-seeai-cli",
-  "version": "1.0.0",
+  "name": "@xccjh/ky-seeai-cli",
+  "version": "1.0.4",
   "description": "SEEAI通用vue项目脚手架",
   "bin": {
     "seeai-cli": "bin/seeai-cli"
