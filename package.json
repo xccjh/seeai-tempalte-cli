@@ -1,6 +1,6 @@
 {
   "name": "@ky/seeai-cli",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "SEEAI通用vue项目脚手架",
   "bin": {
     "seeai-cli": "bin/seeai-cli"
@@ -27,13 +27,12 @@
   "author": "zoujiahe",
   "license": "ISC",
   "dependencies": {
-    "@xccjh/download-git": "^1.0.0",
+    "@xccjh/downloadgit": "^7.0.2",
     "async": "^3.2.0",
     "axios": "^0.20.0",
     "chalk": "^4.1.0",
     "co-prompt": "^1.0.0",
     "commander": "^6.1.0",
-    "download-git-repo": "^3.0.2",
     "fs-extra": "^9.0.1",
     "inquirer": "^8.0.0",
     "ora": "^5.1.0"

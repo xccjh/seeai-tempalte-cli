@@ -5,7 +5,7 @@ const {spawn, exec} = require('child_process');
 const {templateOrigin, domainOrigin} = require('../config');
 
 //downloadGitRepo 为普通方法，不支持promise
-const downloadGitRepo = require('@xccjh/download-git')
+const downloadGitRepo = require('@xccjh/downloadgit')
 const util = require('util');
 const path = require('path')
 const log = require("./Log")
@@ -86,14 +86,13 @@ class Creator {
         let that = this;
         log.info('√ 项目初始化完毕!')
         if (options && options.skipInstall) {
-            // const gitCommand = `cd ${downLoadUrl} && seeai-cli r .git && git init && git add . && git commit -m 初始化项目`;
-            const gitCommand = `cd ${downLoadUrl} && git remote rm origin`;
+            const gitCommand = `cd ${downLoadUrl} && git remote rm origin && git branch -d master && git co -b master`;
             exec(gitCommand, function (err, stdout, stderr) {
                 if (err) {
                     console.log('get stdout error:' + gitCommand)
                     console.log(stderr)
-                    log.error(`\r? 初始化git失败,不用担心,请手动进入 ${that.name} 删除.git，重新初始化git即可:`)
-                    log.error(`\n cd ${that.name} \n git add .\n git commit -m 初始化项目`)
+                    log.error(`\r? 初始化git失败,不用担心,请手动进入 ${that.name} 重新初始化git即可:`)
+                    log.error(`\n cd ${that.name} \n git remote rm origin\n git branch -d master\n git co -b master`)
                     log.error(`\n 没有安装依赖，记得手动安装依赖哦~`)
                     process.exit()
                 } else {
@@ -115,20 +114,19 @@ class Creator {
         });
         instance.on('close', (code) => {
             if (code === 0) {
-                // const gitCommand = `cd ${downLoadUrl} && seeai-cli r .git && git init && git add . && git commit -m 初始化项目`;
-                const gitCommand = `cd ${downLoadUrl} && git remote rm origin`;
+                const gitCommand = `cd ${downLoadUrl} && git remote rm origin && git branch -d master && git co -b master`;
                 exec(gitCommand, function (err, stdout, stderr) {
                     if (err) {
                         console.log('get stdout error:' + gitCommand)
                         console.log(stderr)
-                        log.error(`\r? 初始化git失败,不用担心,请手动进入 ${that.name} 删除.git，初始化git即可:`)
-                        log.error(`\n cd ${that.name} \n git add .\n git commit -m 初始化项目`)
+                        log.error(`\n? 初始化git失败,不用担心,请手动进入 ${that.name} 删除.git，初始化git即可:`)
+                        log.error(`\n cd ${that.name} \n git remote rm origin\n git branch -d master\n git co -b master`)
                         process.exit()
                     } else {
-                        log.info(`√ 安装依赖成功,初始化git成功!`)
+                        log.info(`\n√ 安装依赖成功,初始化git成功!`)
                         log.info(`√ 成功创建项目 ${that.name}!`)
                         log.info(`√ 使用以下命令运行项目即可:`)
-                        log.info(`  cd ${that.name} \n  yarn start \n`)
+                        log.info(` cd ${that.name} \n  yarn start \n`)
                         process.exit()
                     }
                 });
