@@ -86,13 +86,13 @@ class Creator {
         let that = this;
         log.info('√ 项目初始化完毕!')
         if (options && options.skipInstall) {
-            const gitCommand = `cd ${downLoadUrl} && git remote rm origin && git branch -D master && git co -b master`;
+            const gitCommand = `cd ${downLoadUrl} && git remote rm origin && git branch -D master && git checkout -b master`;
             exec(gitCommand, function (err, stdout, stderr) {
                 if (err) {
                     console.log('get stdout error:' + gitCommand)
                     console.log(stderr)
                     log.error(`\r? 初始化git失败,不用担心,请手动进入 ${that.name} 重新初始化git即可:`)
-                    log.error(`\n cd ${that.name} \n git remote rm origin\n git branch -D master\n git co -b master`)
+                    log.error(`\n cd ${that.name} \n git remote rm origin\n git branch -D master\n git checkout -b master`)
                     log.error(`\n 没有安装依赖，记得手动安装依赖哦~`)
                     process.exit()
                 } else {
@@ -114,13 +114,13 @@ class Creator {
         });
         instance.on('close', (code) => {
             if (code === 0) {
-                const gitCommand = `cd ${downLoadUrl} && git remote rm origin && git branch -D master && git co -b master`;
+                const gitCommand = `cd ${downLoadUrl} && git remote rm origin && git branch -D master && git checkout -b master`;
                 exec(gitCommand, function (err, stdout, stderr) {
                     if (err) {
                         console.log('get stdout error:' + gitCommand)
                         console.log(stderr)
                         log.error(`\n? 初始化git失败,不用担心,请手动进入 ${that.name} 删除.git，初始化git即可:`)
-                        log.error(`\n cd ${that.name} \n git remote rm origin\n git branch -D master\n git co -b master`)
+                        log.error(`\n cd ${that.name} \n git remote rm origin\n git branch -D master\n git checkout -b master`)
                         process.exit()
                     } else {
                         log.info(`\n√ 安装依赖成功,初始化git成功!`)
