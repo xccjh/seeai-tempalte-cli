@@ -1,12 +1,13 @@
-# seeai-cli
-
-![hq-seeai-cli使用演示](https://xccjhzjh.oss-cn-hongkong.aliyuncs.com/xccjh-images/demo.gif)
+# seeai-cli使用说明
 
 ## 创建项目
+
 输入项目命令后进行输入项目名称，选择项目模版，选择项目版本，回车后即可
 ```
 seeai-cli create [project-name]
 ```
+![hq-seeai-cli使用演示](https://xccjhzjh.oss-cn-hongkong.aliyuncs.com/xccjh-images/create-all.gif)
+
 ### 强制创建
 此时将不检测当前创建文件目录中是否存在同名的文件夹，将会直接移除进行创建先的项目
 ```
@@ -17,6 +18,7 @@ seeai-cli create [project-name] -f
 ```
 seeai-cli create [project-name] -s
 ```
+![hq-seeai-cli使用演示](https://xccjhzjh.oss-cn-hongkong.aliyuncs.com/xccjh-images/create.gif)
 
 ## config 配置项目
 
@@ -25,7 +27,9 @@ seeai-cli create [project-name] -s
 https://gitee.com/api/v5/repos/xccjh-zjh
 ```
 ### 自定义模板源
+
 通过命令修改模版源，需要在gitee上创建自己的项目仓库模版organizations
+
 执行以下命令 
 ```
 seeai-cli c -sto
@@ -36,7 +40,10 @@ seeai-cli c -sto
 ? please confirm the template origin xccjh-zjh Yes
 √ config successful!
 ```
+![hq-seeai-cli使用演示](https://xccjhzjh.oss-cn-hongkong.aliyuncs.com/xccjh-images/sto.gif)
+
 更换github模板域，通过命令修改模版域:
+
 ```
 seeai-cli c -stu
 ```
@@ -46,9 +53,14 @@ seeai-cli c -stu
 ? please confirm the template domain https://github.com Yes
 √ config successful!
 ```
+![hq-seeai-cli使用演示](https://xccjhzjh.oss-cn-hongkong.aliyuncs.com/xccjh-images/stu.gif)
+
 这样再次进行创建项目操作 就可以下载你自己模版源下的文件了
 
 ### 获取当前模板源配置
+![hq-seeai-cli使用演示](https://xccjhzjh.oss-cn-hongkong.aliyuncs.com/xccjh-images/stg.gif)
+
+1. 执行：
 ```
 seeai-cli c -g 
 ```
@@ -56,6 +68,10 @@ seeai-cli c -g
 ```shell script
 error: option '-g,--get <templateOrigin|domainOrigin|templateDefault|domainDefault>' argument missing
 ```
+<br/>
+<hr/>
+2. 执行：
+
 ```shell script
 seeai-cli c -g templateOrigin
 ```
@@ -63,6 +79,11 @@ seeai-cli c -g templateOrigin
 ```shell script
 xccjh-zjh
 ```
+<br/>
+<hr/>
+
+3. 执行：
+
 ```shell script
 seeai-cli c -g domainOrigin
 ```
@@ -70,12 +91,18 @@ seeai-cli c -g domainOrigin
 ```shell script
 https://gitee.com
 ```
+
 ### 重置为默认模板源
+1. 执行：
 ```
 seeai-cli c -std
 ```
+2. 示例：
+
+![hq-seeai-cli使用演示](https://xccjhzjh.oss-cn-hongkong.aliyuncs.com/xccjh-images/std.gif)
 
 ## 增加文件
+
 ### 直接添加文件 含后缀名字
 ```
 seeai-cli g seeai-cli.js 
@@ -127,6 +154,9 @@ seeai-cli g seeai-cli/path
 seeai-cli g seeai-cli/
 ```
 进行选择创建文件后缀创建文件,将会创建seeai-cli文件夹和seeai-cli.js
+
+![hq-seeai-cli使用演示](https://xccjhzjh.oss-cn-hongkong.aliyuncs.com/xccjh-images/file.gif)
+
 ### 强制创建文件
 
 ```
@@ -134,6 +164,7 @@ seeai-cli g path -f
 ``` 
 
 ###  创建模版文件
+
 ```
 seeai-cli g -t <template-name>
 ```
@@ -152,6 +183,9 @@ seeai-cli g -t
         exit/template.less  ===== 生成成功!
         exit/template.js  ===== 生成成功!
 ```
+
+![hq-seeai-cli使用演示](https://xccjhzjh.oss-cn-hongkong.aliyuncs.com/xccjh-images/template.gif)
+
 ```shell script
 seeai-cli g -t template
 ```
@@ -169,10 +203,13 @@ seeai-cli g -t template
 [注意点]fileName 相对路径
 
 ## 删除文件/文件夹
+
 ### 删除文件夹
 ```
 seeai-cli r pathName
 ```
+![hq-seeai-cli使用演示](https://xccjhzjh.oss-cn-hongkong.aliyuncs.com/xccjh-images/del.gif)
+
 ### 删除单个文件
 ```
 seeai-cli r filename.js
